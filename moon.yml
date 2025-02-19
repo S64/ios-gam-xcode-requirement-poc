@@ -53,3 +53,19 @@ tasks:
       - 'Podfile.lock'
       - 'Pods/'
       - 'MyTestLibrary.xcworkspace/'
+  build:
+    deps:
+      - 'init'
+    inputs:
+      - '.xcode-version'
+      - 'MyTestLibrary.xcworkspace/'
+      - 'MyTestLibrary/'
+      - 'MyTestLibraryTests/'
+    command: |
+      xcodebuild \
+        build-for-testing \
+          -workspace 'MyTestLibrary.xcworkspace' \
+          -scheme 'MyTestLibrary' \
+          -sdk 'iphonesimulator' \
+          -configuration 'Debug' \
+          -testProductsPath 'build/MyTestLibrary.xctestproducts'
