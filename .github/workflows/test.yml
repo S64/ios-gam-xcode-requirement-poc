@@ -12,9 +12,13 @@ jobs:
     runs-on: macOS-${{ matrix.macos }}
     steps:
       - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          rubygems: 'default'
+          bundler: 'Gemfile.lock'
       - uses: moonrepo/setup-toolchain@v0
         with:
-          auto-install: true
+          auto-install: false
       - run: echo '${{ matrix.xcode }}' > ./.xcode-version
       - run: moon run mutateSystem
       - run: moon run test
