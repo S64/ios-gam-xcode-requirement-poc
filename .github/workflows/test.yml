@@ -1,0 +1,20 @@
+name: test
+on: push
+jobs:
+  test:
+    strategy:
+      matrix:
+        include:
+          - macos: '13'
+            xcode: '15.0.1'
+          - macos: '15'
+            xcode: '16.0'
+    runs-on: macOS-${{ matrix.macos }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: moonrepo/setup-toolchain@v0
+        with:
+          auto-install: true
+      - run: echo '${{ matrix.xcode }}' > ./.xcode-version
+      - run: moon run mutateSystem
+      - run: moon run test
