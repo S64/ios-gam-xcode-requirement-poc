@@ -1,10 +1,31 @@
 $schema: 'https://moonrepo.dev/schemas/project.json'
 language: 'unknown'
 tasks:
+  mutateSystem:
+    deps:
+      - 'initXcode'
+    options:
+      cache: false
+      outputStyle: stream
+      persistent: false
+      interactive: true
   init:
     deps:
       - 'initBundler'
       - 'initCocoaPods'
+  buildXcodes:
+    command: swift run --package-path=Tools/ToolsXcodes/ --configuration=release xcodes version
+    outputs:
+      - 'Tools/ToolsXcodes/.build/'
+  initXcode:
+    deps:
+      - 'buildXcodes'
+    command: Tools/ToolsXcodes/.build/release/xcodes select
+    options:
+      cache: false
+      outputStyle: stream
+      persistent: false
+      interactive: true
   initBundler:
     command: bundle install
     outputs:
