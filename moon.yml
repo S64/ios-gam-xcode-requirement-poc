@@ -13,6 +13,9 @@ tasks:
     deps:
       - 'initBundler'
       - 'initCocoaPods'
+    options:
+      cache: false
+      runDepsInParallel: false
   buildXcodes:
     command: swift run --package-path=Tools/ToolsXcodes/ --configuration=release xcodes version
     inputs:
