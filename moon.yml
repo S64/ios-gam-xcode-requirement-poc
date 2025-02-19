@@ -1,0 +1,20 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+language: 'unknown'
+tasks:
+  init:
+    deps:
+      - 'initBundler'
+      - 'initCocoaPods'
+  initBundler:
+    command: bundle install
+    outputs:
+      - 'vendor/'
+      - 'Gemfile.lock'
+  initCocoaPods:
+    command: bundle exec pod install
+    deps:
+      - 'initBundler'
+    outputs:
+      - 'Podfile.lock'
+      - 'Pods/'
+      - 'MyTestLibrary.xcworkspace/'

@@ -1,0 +1,10 @@
+.DS_Store
+
+/.moon/cache
+/.moon/docker
+
+/MytestLibrary.xcworkspace/
+/Pods/
+/vendor/
+
+/**/xcuserdata/
