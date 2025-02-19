@@ -15,6 +15,8 @@ tasks:
       - 'initCocoaPods'
   buildXcodes:
     command: swift run --package-path=Tools/ToolsXcodes/ --configuration=release xcodes version
+    inputs:
+      - 'Tools/ToolsXcodes/Package.swift'
     outputs:
       - 'Tools/ToolsXcodes/.build/'
   initXcode:
@@ -28,6 +30,10 @@ tasks:
       interactive: true
   initBundler:
     command: bundle install
+    inputs:
+      - '.ruby-version'
+      - '.xcode-version'
+      - 'Gemfile'
     outputs:
       - 'vendor/'
       - 'Gemfile.lock'
@@ -35,6 +41,11 @@ tasks:
     command: bundle exec pod install
     deps:
       - 'initBundler'
+    inputs:
+      - '.ruby-version'
+      - '.xcode-version'
+      - 'Gemfile.lock'
+      - 'Podfile'
     outputs:
       - 'Podfile.lock'
       - 'Pods/'
