@@ -21,4 +21,4 @@ jobs:
           auto-install: false
       - run: echo '${{ matrix.xcode }}' > ./.xcode-version
       - run: moon run mutateSystem
-      - run: moon run test
+      - run: moon run build
